@@ -6,25 +6,28 @@
   <title>The Coin Flip Universe</title>
   <style>
     :root {
-      --bg-1: #050816;
-      --bg-2: #16133b;
-      --bg-3: #311b52;
+      --bg-1: #040814;
+      --bg-2: #11173c;
+      --bg-3: #261249;
+      --bg-4: #4a1845;
       --ink: #f8fbff;
-      --soft: #bfd0ff;
-      --muted: #8ea0d6;
-      --gold-1: #ffe38a;
+      --soft: #cad7ff;
+      --muted: #97a6dd;
+      --gold-1: #ffef9b;
       --gold-2: #f59e0b;
-      --blue-1: #67d1ff;
+      --blue-1: #7de4ff;
       --blue-2: #3b82f6;
-      --violet-1: #d7a6ff;
+      --violet-1: #ddb1ff;
       --violet-2: #8b5cf6;
-      --pink-1: #ff9bd2;
+      --pink-1: #ff9dd8;
       --pink-2: #ec4899;
+      --green-1: #8ff5c3;
+      --green-2: #10b981;
       --panel: rgba(7, 12, 31, 0.38);
-      --panel-strong: rgba(10, 16, 42, 0.62);
+      --panel-strong: rgba(8, 14, 36, 0.72);
       --line: rgba(255, 255, 255, 0.12);
-      --glow: 0 0 24px rgba(103, 209, 255, 0.35);
-      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      --glow: 0 0 30px rgba(103, 209, 255, 0.22);
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
       --radius-xl: 36px;
       --radius-lg: 28px;
       --radius-md: 20px;
@@ -44,10 +47,10 @@
       font-family: "Avenir Next", "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 20% 20%, rgba(103, 209, 255, 0.18), transparent 22%),
-        radial-gradient(circle at 80% 15%, rgba(236, 72, 153, 0.14), transparent 20%),
-        radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.16), transparent 30%),
-        linear-gradient(145deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+        radial-gradient(circle at 20% 20%, rgba(125, 228, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 84% 15%, rgba(255, 157, 216, 0.16), transparent 22%),
+        radial-gradient(circle at 50% 84%, rgba(139, 92, 246, 0.18), transparent 30%),
+        linear-gradient(150deg, var(--bg-1), var(--bg-2) 38%, var(--bg-3) 72%, var(--bg-4));
       overflow: hidden;
     }
 
@@ -58,10 +61,32 @@
       min-height: min(88vh, 760px);
       overflow: hidden;
       border-radius: 34px;
-      background: linear-gradient(180deg, rgba(4, 7, 20, 0.55), rgba(3, 5, 16, 0.72));
+      background: linear-gradient(180deg, rgba(4, 7, 20, 0.5), rgba(2, 5, 16, 0.72));
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: var(--shadow);
       isolation: isolate;
+    }
+
+    .movie.chaos {
+      animation: cameraShake 0.28s linear 8;
+    }
+
+    .movie.balance {
+      animation: settleGlow 1.8s ease;
+    }
+
+    @keyframes cameraShake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-4px, 2px); }
+      50% { transform: translate(4px, -2px); }
+      75% { transform: translate(-2px, -3px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes settleGlow {
+      0% { box-shadow: var(--shadow); }
+      50% { box-shadow: 0 0 0 2px rgba(143, 245, 195, 0.2), 0 0 60px rgba(143, 245, 195, 0.28), var(--shadow); }
+      100% { box-shadow: var(--shadow); }
     }
 
     .background-layers,
@@ -84,28 +109,28 @@
     }
 
     .nebula.one {
-      width: 420px;
-      height: 420px;
-      left: -80px;
+      width: 460px;
+      height: 460px;
+      left: -90px;
       top: -70px;
-      background: radial-gradient(circle, rgba(103, 209, 255, 0.34), transparent 70%);
+      background: radial-gradient(circle, rgba(125, 228, 255, 0.32), transparent 70%);
     }
 
     .nebula.two {
-      width: 460px;
-      height: 460px;
-      right: -120px;
+      width: 480px;
+      height: 480px;
+      right: -130px;
       top: 40px;
-      background: radial-gradient(circle, rgba(236, 72, 153, 0.28), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 157, 216, 0.24), transparent 70%);
       animation-duration: 22s;
     }
 
     .nebula.three {
-      width: 520px;
-      height: 520px;
-      left: 35%;
+      width: 540px;
+      height: 540px;
+      left: 34%;
       bottom: -220px;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.28), transparent 70%);
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 70%);
       animation-duration: 26s;
     }
 
@@ -114,13 +139,18 @@
         transform: translate3d(0, 0, 0) scale(1);
       }
       to {
-        transform: translate3d(40px, -30px, 0) scale(1.08);
+        transform: translate3d(42px, -34px, 0) scale(1.08);
       }
     }
 
-    .stars {
+    .stars,
+    .floating-coins,
+    .spark-layer,
+    .probability-particles,
+    .text-moments {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       overflow: hidden;
     }
 
@@ -145,17 +175,10 @@
       }
     }
 
-    .floating-coins {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
     .float-coin {
       position: absolute;
       font-size: clamp(1.6rem, 2vw, 2.2rem);
-      opacity: 0.18;
+      opacity: 0.16;
       animation: floatCoin linear infinite;
     }
 
@@ -186,14 +209,14 @@
       position: absolute;
       left: 50%;
       top: 48%;
-      width: clamp(120px, 15vw, 220px);
+      width: clamp(124px, 15vw, 220px);
       aspect-ratio: 1 / 1;
-      margin-left: calc(clamp(120px, 15vw, 220px) / -2);
-      margin-top: calc(clamp(120px, 15vw, 220px) / -2);
+      margin-left: calc(clamp(124px, 15vw, 220px) / -2);
+      margin-top: calc(clamp(124px, 15vw, 220px) / -2);
       border-radius: 50%;
       display: grid;
       place-items: center;
-      font-size: clamp(3.8rem, 5vw, 6.2rem);
+      font-size: clamp(3.9rem, 5vw, 6.2rem);
       background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
       border: 8px solid rgba(255, 255, 255, 0.92);
       box-shadow:
@@ -205,47 +228,33 @@
       z-index: 8;
     }
 
-    .main-coin.hidden {
-      opacity: 0;
-    }
-
     .main-coin.drop-in {
-      animation: dropBounce 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation: dropBounce 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
     }
 
     .main-coin.flip {
-      animation: coinFlip 0.8s ease-in-out;
+      animation: coinFlip 1s ease-in-out;
     }
 
     .main-coin.idle-pulse {
       animation: pulseGlow 2.8s ease-in-out infinite;
     }
 
+    .main-coin.balance-pulse {
+      animation: balancePulse 1.4s ease-in-out 3;
+    }
+
     @keyframes dropBounce {
-      0% {
-        transform: translateY(-360px) scale(0.75) rotate(-35deg);
-      }
-      55% {
-        transform: translateY(18px) scale(1.05) rotate(12deg);
-      }
-      72% {
-        transform: translateY(-12px) scale(0.98) rotate(-8deg);
-      }
-      100% {
-        transform: translateY(0) scale(1) rotate(0deg);
-      }
+      0% { transform: translateY(-380px) scale(0.74) rotate(-30deg); }
+      55% { transform: translateY(18px) scale(1.08) rotate(12deg); }
+      72% { transform: translateY(-12px) scale(0.98) rotate(-8deg); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
 
     @keyframes coinFlip {
-      0% {
-        transform: rotateY(0deg) scale(1);
-      }
-      50% {
-        transform: rotateY(720deg) scale(1.08);
-      }
-      100% {
-        transform: rotateY(1440deg) scale(1);
-      }
+      0% { transform: rotateY(0deg) scale(1); }
+      50% { transform: rotateY(900deg) scale(1.1); }
+      100% { transform: rotateY(1800deg) scale(1); }
     }
 
     @keyframes pulseGlow {
@@ -265,31 +274,15 @@
       }
     }
 
-    .caption-wrap {
-      position: absolute;
-      left: 50%;
-      bottom: 34px;
-      transform: translateX(-50%);
-      width: min(88%, 980px);
-      text-align: center;
-      z-index: 12;
-    }
-
-    .title {
-      margin: 0 0 10px;
-      font-size: clamp(2.2rem, 4vw, 4.4rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .caption {
-      margin: 0 auto;
-      max-width: 34ch;
-      font-size: clamp(1.1rem, 1.65vw, 1.5rem);
-      line-height: 1.6;
-      color: var(--soft);
-      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    @keyframes balancePulse {
+      0%, 100% { transform: scale(1); }
+      50% {
+        transform: scale(1.12);
+        box-shadow:
+          inset 0 6px 18px rgba(255, 255, 255, 0.42),
+          0 22px 46px rgba(16, 185, 129, 0.28),
+          0 0 60px rgba(143, 245, 195, 0.48);
+      }
     }
 
     .scene-badge {
@@ -304,7 +297,49 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      z-index: 10;
+      z-index: 12;
+    }
+
+    .caption-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 36px;
+      transform: translateX(-50%);
+      width: min(88%, 1020px);
+      text-align: center;
+      z-index: 13;
+    }
+
+    .title {
+      margin: 0 0 10px;
+      font-size: clamp(2.2rem, 4vw, 4.5rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .caption {
+      margin: 0 auto;
+      max-width: 40ch;
+      font-size: clamp(1.16rem, 1.75vw, 1.55rem);
+      line-height: 1.58;
+      color: var(--soft);
+      text-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-note {
+      position: absolute;
+      top: 86px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 20px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--soft);
+      font-weight: 700;
+      z-index: 12;
+      backdrop-filter: blur(12px);
     }
 
     .result-cloud,
@@ -320,10 +355,10 @@
       position: absolute;
       top: 46%;
       left: 50%;
-      width: 58px;
-      height: 58px;
-      margin-left: -29px;
-      margin-top: -29px;
+      width: 60px;
+      height: 60px;
+      margin-left: -30px;
+      margin-top: -30px;
       border-radius: 50%;
       display: grid;
       place-items: center;
@@ -331,7 +366,7 @@
       font-weight: 900;
       color: white;
       box-shadow: 0 18px 26px rgba(0, 0, 0, 0.18);
-      animation: bubbleFly 1.8s ease-out forwards;
+      animation: bubbleFly 2.2s ease-out forwards;
     }
 
     .result-bubble.heads {
@@ -347,13 +382,190 @@
         opacity: 0;
         transform: translate3d(0, 0, 0) scale(0.5);
       }
-      20% {
-        opacity: 1;
-      }
+      20% { opacity: 1; }
       to {
-        opacity: 0.95;
+        opacity: 0.96;
         transform: translate3d(var(--move-x), var(--move-y), 0) scale(1);
       }
+    }
+
+    .coin-trail {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 239, 155, 1), rgba(255, 239, 155, 0));
+      filter: blur(0.5px);
+      animation: trailFade 1s ease forwards;
+    }
+
+    @keyframes trailFade {
+      from {
+        opacity: 1;
+        transform: scale(1.3);
+      }
+      to {
+        opacity: 0;
+        transform: scale(0.2);
+      }
+    }
+
+    .spark {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(125, 228, 255, 0.1));
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.65);
+      animation: sparkOut 1.1s ease-out forwards;
+    }
+
+    @keyframes sparkOut {
+      from {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translate3d(var(--dx), var(--dy), 0) scale(0.2);
+      }
+    }
+
+    .probability-particle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(143, 245, 195, 0.95), rgba(143, 245, 195, 0.08));
+      box-shadow: 0 0 24px rgba(143, 245, 195, 0.58);
+      animation: probabilityRise 2.8s ease forwards;
+    }
+
+    @keyframes probabilityRise {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 60px, 0) scale(0.4);
+      }
+      20% { opacity: 1; }
+      to {
+        opacity: 0;
+        transform: translate3d(var(--px), -120px, 0) scale(1.1);
+      }
+    }
+
+    .text-moment {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-align: center;
+      text-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      animation: textMoment 3.6s ease forwards;
+      z-index: 11;
+    }
+
+    @keyframes textMoment {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.82);
+      }
+      18%, 72% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.06);
+      }
+    }
+
+    .probability-panel,
+    .metric-panel,
+    .bars-panel,
+    .columns-panel,
+    .machine-panel,
+    .takeaway-panel {
+      backdrop-filter: blur(14px);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--glow);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+    }
+
+    .probability-panel.visible,
+    .metric-panel.visible,
+    .bars-panel.visible,
+    .columns-panel.visible,
+    .machine-panel.visible,
+    .takeaway-panel.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .probability-panel {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) translateY(18px);
+      width: min(820px, 82vw);
+      display: grid;
+      gap: 18px;
+      z-index: 9;
+    }
+
+    .probability-panel.visible {
+      transform: translate(-50%, -50%);
+    }
+
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .prob-card {
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      display: grid;
+      gap: 10px;
+    }
+
+    .prob-card strong {
+      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+    }
+
+    .prob-card span {
+      font-size: clamp(1rem, 1.6vw, 1.28rem);
+      color: var(--soft);
+      line-height: 1.55;
+    }
+
+    .prob-equals {
+      text-align: center;
+      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 0.92rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     .hud {
@@ -377,11 +589,8 @@
     .brand,
     .status,
     .controls,
-    .metric-panel,
-    .machine-panel,
-    .bars-panel,
-    .columns-panel,
-    .takeaway-panel {
+    .note-badge,
+    .script-panel {
       backdrop-filter: blur(14px);
       background: var(--panel);
       border: 1px solid var(--line);
@@ -389,7 +598,8 @@
     }
 
     .brand,
-    .status {
+    .status,
+    .note-badge {
       padding: 12px 16px;
       border-radius: var(--radius-pill);
       font-weight: 800;
@@ -401,12 +611,12 @@
       align-items: center;
     }
 
-    .brand strong {
-      letter-spacing: 0.03em;
-    }
-
     .status {
       color: var(--soft);
+    }
+
+    .note-badge {
+      color: #fff3b8;
     }
 
     .controls {
@@ -418,7 +628,8 @@
     }
 
     button,
-    select {
+    select,
+    summary {
       border: none;
       border-radius: var(--radius-pill);
       font: inherit;
@@ -445,8 +656,12 @@
     }
 
     .ghost {
-      background: rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.1);
       box-shadow: none;
+    }
+
+    .audio-button {
+      background: linear-gradient(135deg, var(--pink-2), var(--violet-2));
     }
 
     .speed-wrap {
@@ -472,41 +687,10 @@
       gap: 18px;
     }
 
-    .metric-panel,
-    .bars-panel,
-    .columns-panel,
-    .machine-panel,
-    .takeaway-panel {
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      opacity: 0;
-      transform: translateY(14px);
-      pointer-events: none;
-    }
-
-    .metric-panel.visible,
-    .bars-panel.visible,
-    .columns-panel.visible,
-    .machine-panel.visible,
-    .takeaway-panel.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
     .metric-panel {
-      width: min(370px, 34vw);
+      width: min(390px, 35vw);
       display: grid;
       gap: 14px;
-    }
-
-    .panel-title {
-      margin: 0;
-      font-size: 0.9rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
     }
 
     .metric-grid {
@@ -535,7 +719,7 @@
     }
 
     .bars-panel {
-      width: min(470px, 44vw);
+      width: min(500px, 46vw);
       margin-left: auto;
       display: grid;
       gap: 16px;
@@ -560,13 +744,14 @@
       border-radius: var(--radius-pill);
       overflow: hidden;
       background: rgba(255, 255, 255, 0.08);
+      position: relative;
     }
 
     .fill {
       height: 100%;
       width: 0%;
       border-radius: inherit;
-      transition: width 0.2s ease;
+      transition: width 0.28s ease;
     }
 
     .fill.heads {
@@ -577,17 +762,27 @@
       background: linear-gradient(135deg, var(--violet-1), var(--violet-2));
     }
 
+    .track.balance::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(143, 245, 195, 0.42), transparent);
+      animation: sweep 1.2s ease;
+    }
+
+    @keyframes sweep {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+
     .columns-panel {
       position: absolute;
       left: 50%;
       top: 53%;
       transform: translate(-50%, -50%);
-      width: min(640px, 60vw);
+      width: min(660px, 62vw);
       padding-top: 48px;
-    }
-
-    .columns-panel.visible {
-      transform: translate(-50%, -50%);
+      z-index: 8;
     }
 
     .column-headings {
@@ -653,17 +848,18 @@
       left: 50%;
       top: 48%;
       transform: translate(-50%, -50%);
-      width: min(760px, 72vw);
+      width: min(820px, 74vw);
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
       gap: 18px;
       align-items: center;
+      z-index: 9;
     }
 
     .machine-box,
     .output-box,
     .input-box {
-      min-height: 160px;
+      min-height: 170px;
       border-radius: var(--radius-lg);
       padding: 18px;
       display: grid;
@@ -675,9 +871,9 @@
 
     .machine-box {
       background:
-        radial-gradient(circle at top, rgba(103, 209, 255, 0.12), transparent 55%),
+        radial-gradient(circle at top, rgba(125, 228, 255, 0.16), transparent 55%),
         rgba(255, 255, 255, 0.06);
-      box-shadow: 0 0 30px rgba(103, 209, 255, 0.18);
+      box-shadow: 0 0 30px rgba(125, 228, 255, 0.2);
     }
 
     .machine-label {
@@ -720,25 +916,13 @@
       animation: machineFloat 1.3s ease-in-out infinite alternate;
     }
 
-    .machine-coin:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .machine-coin:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .machine-coin:nth-child(4) {
-      animation-delay: 0.6s;
-    }
+    .machine-coin:nth-child(2) { animation-delay: 0.2s; }
+    .machine-coin:nth-child(3) { animation-delay: 0.4s; }
+    .machine-coin:nth-child(4) { animation-delay: 0.6s; }
 
     @keyframes machineFloat {
-      from {
-        transform: translateY(0) rotate(0deg);
-      }
-      to {
-        transform: translateY(-10px) rotate(12deg);
-      }
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(-10px) rotate(12deg); }
     }
 
     .takeaway-panel {
@@ -746,18 +930,15 @@
       left: 50%;
       top: 46%;
       transform: translate(-50%, -50%);
-      width: min(680px, 76vw);
+      width: min(740px, 78vw);
       text-align: center;
       display: grid;
       gap: 14px;
-    }
-
-    .takeaway-panel.visible {
-      transform: translate(-50%, -50%);
+      z-index: 9;
     }
 
     .takeaway-main {
-      font-size: clamp(2rem, 3.6vw, 3.8rem);
+      font-size: clamp(2rem, 3.7vw, 3.9rem);
       font-weight: 900;
       line-height: 1.12;
     }
@@ -768,28 +949,64 @@
       line-height: 1.6;
     }
 
-    .flash {
-      animation: flashIn 0.8s ease both;
+    .script-panel {
+      width: min(100%, 1240px);
+      margin: 0 22px 18px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      pointer-events: auto;
+      align-self: end;
     }
 
-    @keyframes flashIn {
-      from {
-        opacity: 0;
-        transform: scale(0.92);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .script-panel summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 20px;
+      font-weight: 800;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .script-panel summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .script-content {
+      padding: 0 20px 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .script-content p {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .script-content strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .audio-holder {
+      display: grid;
+      gap: 12px;
+    }
+
+    audio {
+      width: min(100%, 380px);
     }
 
     .fade-screen {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.16));
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.22));
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.8s ease;
+      transition: opacity 1s ease;
       z-index: 14;
     }
 
@@ -824,6 +1041,10 @@
       .machine-arrow {
         transform: rotate(90deg);
       }
+
+      .prob-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
@@ -834,6 +1055,11 @@
       .top-hud,
       .bottom-hud {
         padding: 14px;
+      }
+
+      .hero-note {
+        width: calc(100% - 36px);
+        text-align: center;
       }
 
       .metric-grid {
@@ -848,23 +1074,42 @@
   </style>
 </head>
 <body>
-  <main class="movie">
+  <main class="movie" id="movie">
     <div class="background-layers">
       <div class="nebula one"></div>
       <div class="nebula two"></div>
       <div class="nebula three"></div>
       <div class="stars" id="stars"></div>
       <div class="floating-coins" id="floatingCoins"></div>
+      <div class="spark-layer" id="sparkLayer"></div>
+      <div class="probability-particles" id="probabilityParticles"></div>
+      <div class="text-moments" id="textMoments"></div>
     </div>
 
     <section class="scene">
       <div class="scene-visual">
         <div class="scene-badge" id="sceneBadge">Opening</div>
+        <div class="hero-note" id="heroNote">Press F11 / fullscreen recommended before recording.</div>
 
         <div class="main-coin" id="mainCoin">🪙</div>
 
         <div class="result-cloud" id="resultCloud"></div>
         <div class="column-field" id="columnField"></div>
+
+        <div class="probability-panel" id="probabilityPanel">
+          <h2 class="panel-title">Probability Basics</h2>
+          <div class="prob-grid">
+            <div class="prob-card">
+              <strong>Heads</strong>
+              <span>1 out of 2 possible outcomes</span>
+            </div>
+            <div class="prob-card">
+              <strong>Tails</strong>
+              <span>1 out of 2 possible outcomes</span>
+            </div>
+          </div>
+          <div class="prob-equals">1/2 = 50% each</div>
+        </div>
 
         <div class="columns-panel" id="columnsPanel">
           <div class="column-headings">
@@ -920,6 +1165,7 @@
     <section class="hud">
       <div class="top-hud">
         <div class="brand"><span>🎬</span><strong>The Coin Flip Universe</strong></div>
+        <div class="note-badge" id="runtimeNote">Runtime target: about 4 minutes 30 seconds</div>
         <div class="status" id="statusText">Ready to start the movie</div>
       </div>
 
@@ -941,7 +1187,7 @@
             </div>
             <div class="metric-box">
               <span class="metric-label">Percentages</span>
-              <span class="metric-value" id="percentText">0% / 0%</span>
+              <span class="metric-value" id="percentText">0.0% / 0.0%</span>
             </div>
           </div>
         </div>
@@ -950,21 +1196,22 @@
           <h2 class="panel-title">Probability Bars</h2>
           <div class="bar-row">
             <strong>Heads</strong>
-            <div class="track"><div class="fill heads" id="headsBar"></div></div>
+            <div class="track" id="headsTrack"><div class="fill heads" id="headsBar"></div></div>
             <span id="headsPercent">0.0%</span>
           </div>
           <div class="bar-row">
             <strong>Tails</strong>
-            <div class="track"><div class="fill tails" id="tailsBar"></div></div>
+            <div class="track" id="tailsTrack"><div class="fill tails" id="tailsBar"></div></div>
             <span id="tailsPercent">0.0%</span>
           </div>
         </div>
       </div>
 
       <div class="bottom-hud">
-        <div class="status" id="sceneProgress">Scene 1 of 7</div>
+        <div class="status" id="sceneProgress">Scene 1 of 8</div>
         <div class="controls">
           <button id="startButton">Start Movie</button>
+          <button class="audio-button" id="startAudioButton">Start Movie + Audio</button>
           <button class="ghost" id="pauseButton" disabled>Pause</button>
           <button class="ghost" id="resetButton">Reset</button>
           <label class="speed-wrap" for="speedSelect">
@@ -977,6 +1224,50 @@
           </label>
         </div>
       </div>
+
+      <details class="script-panel">
+        <summary>Narration Script</summary>
+        <div class="script-content">
+          <div class="audio-holder">
+            <strong>Optional Audio Track</strong>
+            <audio id="voiceover" controls preload="none">
+              <source src="voiceover.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div>
+            <strong>Scene 1</strong>
+            <p>Welcome to the Coin Flip Universe. In this video, we are learning randomness and probability using one simple object: a coin. A single coin flip may seem small, but it shows one of the biggest ideas in probability. Random events can still create patterns over time.</p>
+          </div>
+          <div>
+            <strong>Scene 2</strong>
+            <p>Randomness means we cannot predict the exact outcome before it happens. Before the coin lands, we do not know if it will be heads or tails. Each flip is uncertain, even if the coin is fair. That uncertainty is what makes a single trial random.</p>
+          </div>
+          <div>
+            <strong>Scene 3</strong>
+            <p>Probability tells us how likely an outcome is. A fair coin has two possible outcomes: heads and tails. Since both are equally likely, the probability of heads is one out of two, or fifty percent. The probability of tails is also one out of two, or fifty percent.</p>
+          </div>
+          <div>
+            <strong>Scene 4</strong>
+            <p>Now let’s run a small experiment. If we flip the coin only ten times, the results might look uneven. We might get more heads than tails, or more tails than heads. That does not mean the coin is broken. It simply means small samples can be messy.</p>
+          </div>
+          <div>
+            <strong>Scene 5</strong>
+            <p>When we increase the number of flips, the pattern starts becoming clearer. With one hundred flips, the percentages usually move closer to fifty-fifty. The results are still random, but the overall trend starts to match the expected probability.</p>
+          </div>
+          <div>
+            <strong>Scene 6</strong>
+            <p>With one thousand flips, the long-term pattern becomes much easier to see. Individual flips are still unpredictable, but the final percentages usually settle near fifty percent heads and fifty percent tails. This is the main idea: randomness affects single events, while probability describes long-term behavior.</p>
+          </div>
+          <div>
+            <strong>Scene 7</strong>
+            <p>This idea connects directly to Monte Carlo simulation. Monte Carlo simulations use randomness many times to estimate probabilities or solve problems. Instead of predicting one exact outcome, we run many trials, count what happens, and use the results to estimate the answer.</p>
+          </div>
+          <div>
+            <strong>Scene 8</strong>
+            <p>So the final takeaway is simple: one flip is random, but many flips reveal a pattern. Probability is not about knowing exactly what happens next. It is about understanding what happens over time.</p>
+          </div>
+        </div>
+      </details>
     </section>
 
     <div class="fade-screen" id="fadeScreen"></div>
@@ -986,24 +1277,31 @@
     // ------------------------------
     // 1. Grab the page elements once
     // ------------------------------
+    const movie = document.getElementById("movie");
     const stars = document.getElementById("stars");
     const floatingCoins = document.getElementById("floatingCoins");
+    const sparkLayer = document.getElementById("sparkLayer");
+    const probabilityParticles = document.getElementById("probabilityParticles");
+    const textMoments = document.getElementById("textMoments");
     const mainCoin = document.getElementById("mainCoin");
     const sceneBadge = document.getElementById("sceneBadge");
+    const heroNote = document.getElementById("heroNote");
     const titleText = document.getElementById("titleText");
     const captionText = document.getElementById("captionText");
     const statusText = document.getElementById("statusText");
     const sceneProgress = document.getElementById("sceneProgress");
     const resultCloud = document.getElementById("resultCloud");
-    const columnField = document.getElementById("columnField");
     const headsColumn = document.getElementById("headsColumn");
     const tailsColumn = document.getElementById("tailsColumn");
+    const probabilityPanel = document.getElementById("probabilityPanel");
     const metricPanel = document.getElementById("metricPanel");
     const barsPanel = document.getElementById("barsPanel");
     const columnsPanel = document.getElementById("columnsPanel");
     const machinePanel = document.getElementById("machinePanel");
     const takeawayPanel = document.getElementById("takeawayPanel");
     const fadeScreen = document.getElementById("fadeScreen");
+    const headsTrack = document.getElementById("headsTrack");
+    const tailsTrack = document.getElementById("tailsTrack");
 
     const totalCount = document.getElementById("totalCount");
     const headsCount = document.getElementById("headsCount");
@@ -1015,12 +1313,14 @@
     const tailsPercent = document.getElementById("tailsPercent");
 
     const startButton = document.getElementById("startButton");
+    const startAudioButton = document.getElementById("startAudioButton");
     const pauseButton = document.getElementById("pauseButton");
     const resetButton = document.getElementById("resetButton");
     const speedSelect = document.getElementById("speedSelect");
+    const voiceover = document.getElementById("voiceover");
 
     // ------------------------------
-    // 2. Main state for the movie
+    // 2. Movie state and timing
     // ------------------------------
     let total = 0;
     let heads = 0;
@@ -1029,27 +1329,32 @@
     let running = false;
     let runToken = 0;
 
+    // The user asked for about 4:30 total runtime. These are scaled versions
+    // of the requested scene weights so the default "Normal" playback lands
+    // close to that total while still preserving the same pacing ratio.
+    const baseSceneDurations = {
+      1: 25300,
+      2: 38000,
+      3: 38000,
+      4: 38000,
+      5: 42200,
+      6: 42200,
+      7: 29500,
+      8: 16900
+    };
+
     const speedSettings = {
       slow: {
-        scenePause: 2200,
-        randomFlipDelay: 1200,
-        smallDelay: 520,
-        mediumDelay: 26,
-        largeDelay: 2
+        multiplier: 1.18,
+        label: "Slow"
       },
       normal: {
-        scenePause: 1600,
-        randomFlipDelay: 850,
-        smallDelay: 300,
-        mediumDelay: 14,
-        largeDelay: 1
+        multiplier: 1,
+        label: "Normal"
       },
       fast: {
-        scenePause: 1000,
-        randomFlipDelay: 620,
-        smallDelay: 170,
-        mediumDelay: 7,
-        largeDelay: 0
+        multiplier: 0.74,
+        label: "Fast"
       }
     };
 
@@ -1082,10 +1387,14 @@
     }
 
     // ------------------------------
-    // 4. Small helper functions
+    // 4. General helpers
     // ------------------------------
     function getSpeed() {
       return speedSettings[speedSelect.value];
+    }
+
+    function sceneDuration(sceneNumber) {
+      return Math.round(baseSceneDurations[sceneNumber] * getSpeed().multiplier);
     }
 
     function randomResult() {
@@ -1096,10 +1405,11 @@
       mainCoin.classList.remove("flip");
       void mainCoin.offsetWidth;
       mainCoin.classList.add("flip");
+      createTrailBurst();
     }
 
     function setScene(sceneNumber, badge, title, caption) {
-      sceneProgress.textContent = `Scene ${sceneNumber} of 7`;
+      sceneProgress.textContent = `Scene ${sceneNumber} of 8`;
       sceneBadge.textContent = badge;
       titleText.textContent = title;
       captionText.textContent = caption;
@@ -1124,7 +1434,7 @@
 
     function flashTransition() {
       fadeScreen.classList.add("visible");
-      setTimeout(() => fadeScreen.classList.remove("visible"), 450);
+      setTimeout(() => fadeScreen.classList.remove("visible"), 700);
     }
 
     async function wait(ms, token) {
@@ -1150,9 +1460,11 @@
 
     function clearVisualBursts() {
       resultCloud.innerHTML = "";
-      columnField.innerHTML = "";
       headsColumn.innerHTML = "";
       tailsColumn.innerHTML = "";
+      sparkLayer.innerHTML = "";
+      probabilityParticles.innerHTML = "";
+      textMoments.innerHTML = "";
     }
 
     function resetCounts() {
@@ -1174,6 +1486,15 @@
       tailsBar.style.width = `${tailsPct}%`;
       headsPercent.textContent = `${headsPct.toFixed(1)}%`;
       tailsPercent.textContent = `${tailsPct.toFixed(1)}%`;
+
+      const balanceDistance = Math.abs(headsPct - 50);
+      if (total > 40 && balanceDistance < 2.5) {
+        headsTrack.classList.add("balance");
+        tailsTrack.classList.add("balance");
+      } else {
+        headsTrack.classList.remove("balance");
+        tailsTrack.classList.remove("balance");
+      }
     }
 
     function recordResult(result) {
@@ -1186,35 +1507,104 @@
       updateStats();
     }
 
-    function createBubble(result) {
+    function showTextMoment(text, color = "#ffffff") {
+      const moment = document.createElement("div");
+      moment.className = "text-moment";
+      moment.textContent = text;
+      moment.style.color = color;
+      textMoments.appendChild(moment);
+      setTimeout(() => moment.remove(), 3600);
+    }
+
+    function createBubble(result, customText = null) {
       const bubble = document.createElement("div");
       bubble.className = `result-bubble ${result.toLowerCase()}`;
-      bubble.textContent = result === "Heads" ? "H" : "T";
+      bubble.textContent = customText || (result === "Heads" ? "H" : "T");
       bubble.style.setProperty("--move-x", `${-360 + Math.random() * 720}px`);
       bubble.style.setProperty("--move-y", `${-180 + Math.random() * 260}px`);
       resultCloud.appendChild(bubble);
-      setTimeout(() => bubble.remove(), 1900);
+      setTimeout(() => bubble.remove(), 2200);
+    }
+
+    function createTrailBurst() {
+      for (let index = 0; index < 8; index += 1) {
+        const trail = document.createElement("div");
+        trail.className = "coin-trail";
+        trail.style.left = `${46 + Math.random() * 8}%`;
+        trail.style.top = `${38 + Math.random() * 10}%`;
+        sparkLayer.appendChild(trail);
+        setTimeout(() => trail.remove(), 1000);
+      }
+    }
+
+    function createSparkBurst(xPercent, yPercent, count = 10) {
+      for (let index = 0; index < count; index += 1) {
+        const spark = document.createElement("div");
+        spark.className = "spark";
+        spark.style.left = `${xPercent}%`;
+        spark.style.top = `${yPercent}%`;
+        spark.style.setProperty("--dx", `${-80 + Math.random() * 160}px`);
+        spark.style.setProperty("--dy", `${-80 + Math.random() * 160}px`);
+        sparkLayer.appendChild(spark);
+        setTimeout(() => spark.remove(), 1100);
+      }
+    }
+
+    function createProbabilityBurst() {
+      for (let index = 0; index < 12; index += 1) {
+        const particle = document.createElement("div");
+        particle.className = "probability-particle";
+        particle.style.left = `${42 + Math.random() * 16}%`;
+        particle.style.top = `${58 + Math.random() * 12}%`;
+        particle.style.setProperty("--px", `${-140 + Math.random() * 280}px`);
+        probabilityParticles.appendChild(particle);
+        setTimeout(() => particle.remove(), 2800);
+      }
     }
 
     function createDot(result, index) {
       const dot = document.createElement("div");
       dot.className = `dot ${result.toLowerCase()}`;
-
       const column = result === "Heads" ? headsColumn : tailsColumn;
       const x = 12 + (index % 18) * 11;
       const y = 240 - Math.floor(index / 18) * 11;
-
       dot.style.left = `${x}px`;
       dot.style.top = `${Math.max(12, y)}px`;
       column.appendChild(dot);
     }
 
     function hideAllPanels() {
+      showElement(probabilityPanel, false);
       showElement(metricPanel, false);
       showElement(barsPanel, false);
       showElement(columnsPanel, false);
       showElement(machinePanel, false);
       showElement(takeawayPanel, false);
+    }
+
+    function triggerChaosEffect() {
+      movie.classList.remove("chaos");
+      void movie.offsetWidth;
+      movie.classList.add("chaos");
+      setTimeout(() => movie.classList.remove("chaos"), 2400);
+    }
+
+    function triggerBalanceEffect() {
+      movie.classList.remove("balance");
+      mainCoin.classList.remove("balance-pulse");
+      void movie.offsetWidth;
+      movie.classList.add("balance");
+      mainCoin.classList.add("balance-pulse");
+      createProbabilityBurst();
+      setTimeout(() => {
+        movie.classList.remove("balance");
+        mainCoin.classList.remove("balance-pulse");
+      }, 1800);
+    }
+
+    function pauseAudioIfNeeded() {
+      voiceover.pause();
+      voiceover.currentTime = 0;
     }
 
     function resetMovie() {
@@ -1224,12 +1614,14 @@
       pauseButton.textContent = "Pause";
       pauseButton.disabled = true;
       startButton.disabled = false;
+      startAudioButton.disabled = false;
+      pauseAudioIfNeeded();
 
       mainCoin.className = "main-coin";
       mainCoin.textContent = "🪙";
       setCoinPosition("50%", "48%");
-      mainCoin.classList.remove("hidden");
       pulseCoin(true);
+      heroNote.style.display = "";
 
       hideAllPanels();
       clearVisualBursts();
@@ -1248,7 +1640,11 @@
     // 5. Scene logic
     // ------------------------------
     async function scene1(token) {
+      const duration = sceneDuration(1);
       flashTransition();
+      heroNote.style.display = "";
+      hideAllPanels();
+      clearVisualBursts();
       setScene(
         1,
         "Opening",
@@ -1256,22 +1652,31 @@
         "Every flip is unpredictable... but patterns appear over time."
       );
       setStatus("Opening scene");
-      hideAllPanels();
-      clearVisualBursts();
       pulseCoin(false);
       mainCoin.className = "main-coin drop-in";
       setCoinPosition("50%", "44%");
 
-      if (!await wait(1800, token)) {
+      if (!await wait(2500, token)) {
         return false;
       }
 
       mainCoin.className = "main-coin idle-pulse";
-      return wait(getSpeed().scenePause, token);
+      createSparkBurst(50, 44, 16);
+      showTextMoment("The Coin Flip Universe", "#ffeaa7");
+
+      if (!await wait(duration - 2500, token)) {
+        return false;
+      }
+
+      return true;
     }
 
     async function scene2(token) {
+      const duration = sceneDuration(2);
       flashTransition();
+      heroNote.style.display = "none";
+      hideAllPanels();
+      clearVisualBursts();
       setScene(
         2,
         "Randomness",
@@ -1279,135 +1684,203 @@
         "Randomness means we cannot predict one exact outcome."
       );
       setStatus("Showing random flips");
-      hideAllPanels();
-      clearVisualBursts();
       setCoinPosition("50%", "46%");
       pulseCoin(false);
 
-      for (let index = 0; index < 5; index += 1) {
+      const flipCount = 8;
+      const flipDelay = Math.max(1500, Math.round(duration * 0.57 / flipCount));
+
+      for (let index = 0; index < flipCount; index += 1) {
         playCoinFlip();
-        if (!await wait(getSpeed().randomFlipDelay * 0.45, token)) {
+
+        if (!await wait(flipDelay * 0.42, token)) {
           return false;
         }
 
         const result = randomResult();
         titleText.textContent = result;
-        captionText.textContent = `Flip ${index + 1}: ${result}. We only know the result after the coin lands.`;
+        captionText.textContent = `Flip ${index + 1}: ${result}. Before the coin lands, the exact outcome is unknown.`;
         createBubble(result);
+        createSparkBurst(50, 46, 6);
 
-        if (!await wait(getSpeed().randomFlipDelay * 0.55, token)) {
+        if (index === 2) {
+          showTextMoment("One flip = unpredictable", "#7de4ff");
+        }
+
+        if (!await wait(flipDelay * 0.58, token)) {
           return false;
         }
       }
 
       titleText.textContent = "Randomness";
-      captionText.textContent = "Even after several flips, the next individual outcome is still uncertain.";
+      captionText.textContent = "Each individual flip is uncertain, even when the coin is perfectly fair.";
       mainCoin.className = "main-coin idle-pulse";
-      return wait(getSpeed().scenePause, token);
+      return wait(Math.round(duration * 0.42), token);
     }
 
     async function scene3(token) {
+      const duration = sceneDuration(3);
       flashTransition();
+      hideAllPanels();
+      clearVisualBursts();
       setScene(
         3,
+        "Probability Basics",
+        "Probability Basics",
+        "A fair coin has two equally likely outcomes: heads and tails."
+      );
+      setStatus("Explaining probability");
+      showElement(probabilityPanel, true);
+      setCoinPosition("50%", "22%");
+      pulseCoin(true);
+      createProbabilityBurst();
+      showTextMoment("1/2 = 50%", "#8ff5c3");
+
+      if (!await wait(Math.round(duration * 0.28), token)) {
+        return false;
+      }
+
+      titleText.textContent = "Heads = 1 out of 2";
+      captionText.textContent = "Heads has probability one out of two, which is the same as fifty percent.";
+      createBubble("Heads", "1/2");
+      createSparkBurst(40, 48, 10);
+
+      if (!await wait(Math.round(duration * 0.22), token)) {
+        return false;
+      }
+
+      titleText.textContent = "Tails = 1 out of 2";
+      captionText.textContent = "Tails also has probability one out of two, so the expected split is fifty-fifty.";
+      createBubble("Tails", "1/2");
+      createSparkBurst(60, 48, 10);
+
+      if (!await wait(Math.round(duration * 0.22), token)) {
+        return false;
+      }
+
+      titleText.textContent = "Probability Basics";
+      captionText.textContent = "Probability tells us what we should expect over time, even though one flip stays unpredictable.";
+      showTextMoment("Expected probability = 50% each", "#ffffff");
+      return wait(Math.round(duration * 0.28), token);
+    }
+
+    async function scene4(token) {
+      const duration = sceneDuration(4);
+      flashTransition();
+      hideAllPanels();
+      clearVisualBursts();
+      resetCounts();
+      setScene(
+        4,
         "Small Sample Chaos",
         "Small Sample Chaos",
         "With a small sample, results can look messy."
       );
       setStatus("Simulating 10 flips");
-      clearVisualBursts();
-      resetCounts();
       showElement(metricPanel, true);
-      showElement(barsPanel, false);
-      showElement(columnsPanel, false);
-      showElement(machinePanel, false);
-      showElement(takeawayPanel, false);
-      setCoinPosition("50%", "32%");
+      setCoinPosition("50%", "31%");
       pulseCoin(false);
+      triggerChaosEffect();
+
+      const flipDelay = Math.max(1700, Math.round(duration * 0.55 / 10));
 
       for (let index = 0; index < 10; index += 1) {
         playCoinFlip();
-        if (!await wait(getSpeed().smallDelay * 0.35, token)) {
+
+        if (!await wait(flipDelay * 0.4, token)) {
           return false;
         }
 
         const result = randomResult();
         recordResult(result);
         createBubble(result);
-        titleText.textContent = "Small Sample Chaos";
-        captionText.textContent = `Flip ${index + 1} of 10 lands on ${result}. Short runs can look very uneven.`;
+        createSparkBurst(50, 33, 8);
+        captionText.textContent = `Flip ${index + 1} of 10: ${result}. Small samples can swing around quickly.`;
 
-        if (!await wait(getSpeed().smallDelay * 0.65, token)) {
+        if (index === 4) {
+          showTextMoment("Small samples = messy", "#ff9dd8");
+        }
+
+        if (!await wait(flipDelay * 0.6, token)) {
           return false;
         }
       }
 
-      captionText.textContent = "With only 10 flips, uneven results are common, even with a fair coin.";
-      return wait(getSpeed().scenePause, token);
+      captionText.textContent = "Ten flips are not enough to force a clean 50/50 split, so the results can look uneven.";
+      return wait(Math.round(duration * 0.45), token);
     }
 
-    async function scene4(token) {
+    async function scene5(token) {
+      const duration = sceneDuration(5);
       flashTransition();
+      hideAllPanels();
+      clearVisualBursts();
+      resetCounts();
       setScene(
-        4,
-        "Bigger Sample",
-        "Bigger Sample",
+        5,
+        "Bigger Sample Pattern",
+        "Bigger Sample Pattern",
         "More trials usually move us closer to the expected probability."
       );
       setStatus("Simulating 100 flips");
-      clearVisualBursts();
-      resetCounts();
       showElement(metricPanel, true);
       showElement(barsPanel, true);
-      showElement(columnsPanel, false);
-      showElement(machinePanel, false);
-      showElement(takeawayPanel, false);
       setCoinPosition("22%", "46%");
       pulseCoin(true);
+
+      const flipDelay = Math.max(140, Math.round(duration * 0.56 / 100));
+      let balanceTriggered = false;
 
       for (let index = 0; index < 100; index += 1) {
         const result = randomResult();
         recordResult(result);
 
-        if ((index + 1) % 10 === 0) {
+        if ((index + 1) % 8 === 0) {
           createBubble(result);
         }
 
         if ((index + 1) % 20 === 0) {
-          captionText.textContent = `After ${index + 1} flips, the bars are starting to move toward a more balanced split.`;
+          captionText.textContent = `After ${index + 1} flips, the bars begin settling toward a more balanced pattern.`;
         }
 
-        if (getSpeed().mediumDelay > 0 && !await wait(getSpeed().mediumDelay, token)) {
-          return false;
+        const headsPct = total === 0 ? 0 : (heads / total) * 100;
+        if (!balanceTriggered && total > 55 && Math.abs(headsPct - 50) < 2.5) {
+          balanceTriggered = true;
+          triggerBalanceEffect();
+          showTextMoment("Many flips = a pattern", "#8ff5c3");
         }
 
-        if (getSpeed().mediumDelay === 0 && token !== runToken) {
+        if (!await wait(flipDelay, token)) {
           return false;
         }
       }
 
-      captionText.textContent = "As the sample grows, the percentages usually drift closer to the expected 50/50 pattern.";
-      return wait(getSpeed().scenePause, token);
+      captionText.textContent = "One hundred flips are still random, but the overall percentages usually move closer to fifty-fifty.";
+      return wait(Math.round(duration * 0.44), token);
     }
 
-    async function scene5(token) {
+    async function scene6(token) {
+      const duration = sceneDuration(6);
       flashTransition();
+      hideAllPanels();
+      clearVisualBursts();
+      resetCounts();
       setScene(
-        5,
+        6,
         "Long-Term Pattern",
         "Long-Term Pattern",
         "Probability describes the long-term pattern, not every single result."
       );
       setStatus("Simulating 1000 flips");
-      clearVisualBursts();
-      resetCounts();
       showElement(metricPanel, true);
       showElement(barsPanel, true);
       showElement(columnsPanel, true);
-      showElement(machinePanel, false);
-      showElement(takeawayPanel, false);
       setCoinPosition("50%", "18%");
       pulseCoin(true);
+
+      const flipDelay = Math.max(10, Math.round(duration * 0.42 / 1000));
+      let nextTextPoint = 250;
+      let bigMomentShown = false;
 
       for (let index = 0; index < 1000; index += 1) {
         const result = randomResult();
@@ -1417,78 +1890,96 @@
           createDot(result, result === "Heads" ? heads - 1 : tails - 1);
         }
 
-        if ((index + 1) % 250 === 0) {
+        if ((index + 1) % 30 === 0) {
+          createProbabilityBurst();
+        }
+
+        if (index + 1 === nextTextPoint) {
           captionText.textContent = `After ${index + 1} flips, the long-term pattern becomes much easier to see.`;
+          nextTextPoint += 250;
         }
 
-        if (getSpeed().largeDelay > 0 && !await wait(getSpeed().largeDelay, token)) {
-          return false;
+        const headsPct = total === 0 ? 0 : (heads / total) * 100;
+        if (!bigMomentShown && total > 600 && Math.abs(headsPct - 50) < 1.8) {
+          bigMomentShown = true;
+          showTextMoment("Probability is long-term behavior", "#8ff5c3");
+          triggerBalanceEffect();
         }
 
-        if (getSpeed().largeDelay === 0 && token !== runToken) {
+        if (!await wait(flipDelay, token)) {
           return false;
         }
       }
 
       const headsPct = total === 0 ? 0 : (heads / total) * 100;
       const tailsPct = total === 0 ? 0 : (tails / total) * 100;
-      captionText.textContent = `Final result: Heads ${headsPct.toFixed(1)}%, Tails ${tailsPct.toFixed(1)}%. Long-term outcomes usually settle near 50/50.`;
-      return wait(getSpeed().scenePause, token);
-    }
-
-    async function scene6(token) {
-      flashTransition();
-      setScene(
-        6,
-        "Monte Carlo Connection",
-        "Monte Carlo Simulation",
-        "Monte Carlo simulation uses randomness many times to estimate probability."
-      );
-      setStatus("Connecting to simulation");
-      clearVisualBursts();
-      showElement(metricPanel, false);
-      showElement(barsPanel, false);
-      showElement(columnsPanel, false);
-      showElement(machinePanel, true);
-      showElement(takeawayPanel, false);
-      setCoinPosition("18%", "48%");
-      pulseCoin(true);
-
-      if (!await wait(getSpeed().scenePause + 600, token)) {
-        return false;
-      }
-
-      captionText.textContent = "Random trials go in, outcomes are counted, and the estimated probability comes out.";
-      return wait(getSpeed().scenePause, token);
+      captionText.textContent = `Final result: Heads ${headsPct.toFixed(1)}%, Tails ${tailsPct.toFixed(1)}%. Large samples reveal the long-term pattern more clearly.`;
+      return wait(Math.round(duration * 0.58), token);
     }
 
     async function scene7(token) {
+      const duration = sceneDuration(7);
       flashTransition();
+      hideAllPanels();
+      clearVisualBursts();
       setScene(
         7,
+        "Monte Carlo Connection",
+        "Monte Carlo Simulation",
+        "Run many random trials, count the outcomes, and estimate probability."
+      );
+      setStatus("Connecting to Monte Carlo simulation");
+      showElement(machinePanel, true);
+      setCoinPosition("16%", "49%");
+      pulseCoin(true);
+      createProbabilityBurst();
+      showTextMoment("Random trials → estimate probability", "#7de4ff");
+
+      if (!await wait(Math.round(duration * 0.48), token)) {
+        return false;
+      }
+
+      captionText.textContent = "Monte Carlo simulation does not predict one exact result. It uses many random results to estimate the bigger picture.";
+      createSparkBurst(50, 48, 16);
+      return wait(Math.round(duration * 0.52), token);
+    }
+
+    async function scene8(token) {
+      const duration = sceneDuration(8);
+      flashTransition();
+      hideAllPanels();
+      clearVisualBursts();
+      setScene(
+        8,
         "Final Takeaway",
         "Final Takeaway",
         "One flip is random. Many flips reveal a pattern."
       );
       setStatus("Final takeaway");
-      hideAllPanels();
-      clearVisualBursts();
       showElement(takeawayPanel, true);
       setCoinPosition("50%", "35%");
       mainCoin.className = "main-coin drop-in";
 
-      if (!await wait(1400, token)) {
+      if (!await wait(Math.round(duration * 0.4), token)) {
         return false;
       }
 
       mainCoin.className = "main-coin idle-pulse";
-      return wait(getSpeed().scenePause + 600, token);
+      showTextMoment("One flip = unpredictable", "#7de4ff");
+
+      if (!await wait(Math.round(duration * 0.27), token)) {
+        return false;
+      }
+
+      showTextMoment("Many flips = a pattern", "#8ff5c3");
+      captionText.textContent = "Probability is not about knowing the next flip. It is about understanding what happens over time.";
+      return wait(Math.round(duration * 0.33), token);
     }
 
     // ------------------------------
     // 6. Play the full movie
     // ------------------------------
-    async function startMovie() {
+    async function playMovie(withAudio = false) {
       if (running) {
         return;
       }
@@ -1497,17 +1988,28 @@
       running = true;
       paused = false;
       startButton.disabled = true;
+      startAudioButton.disabled = true;
       pauseButton.disabled = false;
       pauseButton.textContent = "Pause";
 
+      if (withAudio) {
+        try {
+          voiceover.currentTime = 0;
+          await voiceover.play();
+        } catch (error) {
+          setStatus("Movie started, but the audio file could not play yet.");
+        }
+      }
+
       const token = ++runToken;
-      const scenes = [scene1, scene2, scene3, scene4, scene5, scene6, scene7];
+      const scenes = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8];
 
       for (const scene of scenes) {
         const finished = await scene(token);
         if (!finished || token !== runToken) {
           running = false;
           startButton.disabled = false;
+          startAudioButton.disabled = false;
           pauseButton.disabled = true;
           return;
         }
@@ -1516,6 +2018,7 @@
       setStatus("Movie complete");
       running = false;
       startButton.disabled = false;
+      startAudioButton.disabled = false;
       pauseButton.disabled = true;
     }
 
@@ -1526,17 +2029,27 @@
 
       paused = !paused;
       pauseButton.textContent = paused ? "Resume" : "Pause";
+
+      if (!voiceover.paused) {
+        if (paused) {
+          voiceover.pause();
+        } else {
+          voiceover.play().catch(() => {});
+        }
+      }
+
       setStatus(paused ? "Paused" : "Playing");
     }
 
     // ------------------------------
     // 7. Wire up the controls
     // ------------------------------
-    startButton.addEventListener("click", startMovie);
+    startButton.addEventListener("click", () => playMovie(false));
+    startAudioButton.addEventListener("click", () => playMovie(true));
     pauseButton.addEventListener("click", togglePause);
     resetButton.addEventListener("click", resetMovie);
     speedSelect.addEventListener("change", () => {
-      setStatus(`Speed set to ${speedSelect.value}`);
+      setStatus(`Speed set to ${getSpeed().label}`);
     });
 
     // ------------------------------
