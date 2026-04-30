@@ -51,7 +51,7 @@
         radial-gradient(circle at 84% 15%, rgba(255, 157, 216, 0.16), transparent 22%),
         radial-gradient(circle at 50% 84%, rgba(139, 92, 246, 0.18), transparent 30%),
         linear-gradient(150deg, var(--bg-1), var(--bg-2) 38%, var(--bg-3) 72%, var(--bg-4));
-      overflow: hidden;
+      overflow: auto;
     }
 
     .movie {
@@ -303,11 +303,15 @@
     .caption-wrap {
       position: absolute;
       left: 50%;
-      bottom: 36px;
+      bottom: 28px;
       transform: translateX(-50%);
-      width: min(88%, 1020px);
+      width: min(78%, 880px);
       text-align: center;
       z-index: 13;
+      padding: 16px 20px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(4, 7, 20, 0.18), rgba(4, 7, 20, 0.38));
+      backdrop-filter: blur(8px);
     }
 
     .title {
@@ -515,11 +519,11 @@
     .probability-panel {
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 34%;
       transform: translate(-50%, -50%) translateY(18px);
-      width: min(820px, 82vw);
+      width: min(560px, 56vw);
       display: grid;
-      gap: 18px;
+      gap: 14px;
       z-index: 9;
     }
 
@@ -530,11 +534,11 @@
     .prob-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 14px;
     }
 
     .prob-card {
-      padding: 22px;
+      padding: 18px;
       border-radius: var(--radius-md);
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -544,18 +548,18 @@
     }
 
     .prob-card strong {
-      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
     }
 
     .prob-card span {
-      font-size: clamp(1rem, 1.6vw, 1.28rem);
+      font-size: clamp(0.98rem, 1.35vw, 1.1rem);
       color: var(--soft);
       line-height: 1.55;
     }
 
     .prob-equals {
       text-align: center;
-      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
       font-weight: 900;
       color: #ffffff;
     }
@@ -683,14 +687,16 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 0 22px;
+      padding: 118px 22px 170px;
       gap: 18px;
+      pointer-events: none;
     }
 
     .metric-panel {
       width: min(390px, 35vw);
       display: grid;
       gap: 14px;
+      align-self: flex-start;
     }
 
     .metric-grid {
@@ -723,7 +729,8 @@
       margin-left: auto;
       display: grid;
       gap: 16px;
-      align-self: center;
+      align-self: flex-start;
+      margin-top: 14px;
     }
 
     .bar-row {
@@ -778,9 +785,9 @@
     .columns-panel {
       position: absolute;
       left: 50%;
-      top: 53%;
+      top: 58%;
       transform: translate(-50%, -50%);
-      width: min(660px, 62vw);
+      width: min(560px, 52vw);
       padding-top: 48px;
       z-index: 8;
     }
@@ -806,7 +813,7 @@
 
     .column {
       position: relative;
-      min-height: 280px;
+      min-height: 220px;
       border-radius: var(--radius-md);
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -846,22 +853,23 @@
     .machine-panel {
       position: absolute;
       left: 50%;
-      top: 48%;
+      top: 45%;
       transform: translate(-50%, -50%);
-      width: min(820px, 74vw);
+      width: min(720px, 68vw);
       display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 18px;
+      grid-template-columns: 1fr auto 1.15fr auto 1fr;
+      gap: 12px;
       align-items: center;
       z-index: 9;
+      padding: 14px;
     }
 
     .machine-box,
     .output-box,
     .input-box {
-      min-height: 170px;
-      border-radius: var(--radius-lg);
-      padding: 18px;
+      min-height: 140px;
+      border-radius: 22px;
+      padding: 16px;
       display: grid;
       place-items: center;
       text-align: center;
@@ -877,7 +885,7 @@
     }
 
     .machine-label {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 900;
       letter-spacing: 0.04em;
     }
@@ -888,7 +896,7 @@
     }
 
     .machine-arrow {
-      font-size: 2.6rem;
+      font-size: 2rem;
       color: var(--pink-1);
       animation: arrowPulse 1.2s ease-in-out infinite;
     }
@@ -928,7 +936,7 @@
     .takeaway-panel {
       position: absolute;
       left: 50%;
-      top: 46%;
+      top: 42%;
       transform: translate(-50%, -50%);
       width: min(740px, 78vw);
       text-align: center;
@@ -949,55 +957,65 @@
       line-height: 1.6;
     }
 
-    .script-panel {
-      width: min(100%, 1240px);
-      margin: 0 22px 18px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
+    .playback-chip {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      z-index: 20;
+      display: none;
+      gap: 8px;
+      padding: 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(8, 14, 36, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--glow);
+      backdrop-filter: blur(12px);
       pointer-events: auto;
-      align-self: end;
     }
 
-    .script-panel summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 16px 20px;
-      font-weight: 800;
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.06);
+    .playback-chip.visible {
+      display: flex;
     }
 
-    .script-panel summary::-webkit-details-marker {
+    .playback-chip button {
+      padding: 10px 14px;
+      font-size: 0.92rem;
+    }
+
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--soft);
+      font-weight: 700;
+      padding: 0 8px;
+      white-space: nowrap;
+    }
+
+    .toggle-wrap input {
+      width: 18px;
+      height: 18px;
+      accent-color: #8b5cf6;
+    }
+
+    .movie.playing .top-hud,
+    .movie.playing .bottom-hud {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      pointer-events: none;
+    }
+
+    .movie.clean-mode #runtimeNote {
       display: none;
     }
 
-    .script-content {
-      padding: 0 20px 20px;
-      display: grid;
-      gap: 14px;
+    .movie.clean-mode .hero-note.hidden-note {
+      display: none;
     }
 
-    .script-content p {
-      margin: 0;
-      color: var(--soft);
-      line-height: 1.65;
-      font-size: 1rem;
-    }
-
-    .script-content strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #ffffff;
-      font-size: 1rem;
-    }
-
-    .audio-holder {
-      display: grid;
-      gap: 12px;
-    }
-
-    audio {
-      width: min(100%, 380px);
+    .movie.clean-mode .playback-chip {
+      display: none !important;
     }
 
     .fade-screen {
@@ -1023,6 +1041,7 @@
       .middle-hud {
         flex-direction: column;
         align-items: stretch;
+        padding: 118px 16px 210px;
       }
 
       .metric-panel,
@@ -1035,15 +1054,28 @@
       }
 
       .machine-panel {
+        width: min(92vw, 640px);
         grid-template-columns: 1fr;
+        top: 42%;
       }
 
       .machine-arrow {
         transform: rotate(90deg);
+        justify-self: center;
       }
 
       .prob-grid {
         grid-template-columns: 1fr;
+      }
+
+      .probability-panel {
+        width: min(88vw, 480px);
+        top: 29%;
+      }
+
+      .columns-panel {
+        width: min(90vw, 520px);
+        top: 56%;
       }
     }
 
@@ -1062,6 +1094,11 @@
         text-align: center;
       }
 
+      .caption-wrap {
+        width: calc(100% - 22px);
+        bottom: 16px;
+      }
+
       .metric-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -1069,6 +1106,10 @@
       .bar-row {
         grid-template-columns: 62px 1fr 62px;
         gap: 8px;
+      }
+
+      .columns-panel {
+        top: 52%;
       }
     }
   </style>
@@ -1211,7 +1252,6 @@
         <div class="status" id="sceneProgress">Scene 1 of 8</div>
         <div class="controls">
           <button id="startButton">Start Movie</button>
-          <button class="audio-button" id="startAudioButton">Start Movie + Audio</button>
           <button class="ghost" id="pauseButton" disabled>Pause</button>
           <button class="ghost" id="resetButton">Reset</button>
           <label class="speed-wrap" for="speedSelect">
@@ -1222,52 +1262,18 @@
               <option value="fast">Fast</option>
             </select>
           </label>
+          <label class="toggle-wrap" for="cleanModeToggle">
+            <input type="checkbox" id="cleanModeToggle">
+            Clean Recording Mode
+          </label>
         </div>
       </div>
 
-      <details class="script-panel">
-        <summary>Narration Script</summary>
-        <div class="script-content">
-          <div class="audio-holder">
-            <strong>Optional Audio Track</strong>
-            <audio id="voiceover" controls preload="none">
-              <source src="voiceover.mp3" type="audio/mpeg">
-            </audio>
-          </div>
-          <div>
-            <strong>Scene 1</strong>
-            <p>Welcome to the Coin Flip Universe. In this video, we are learning randomness and probability using one simple object: a coin. A single coin flip may seem small, but it shows one of the biggest ideas in probability. Random events can still create patterns over time.</p>
-          </div>
-          <div>
-            <strong>Scene 2</strong>
-            <p>Randomness means we cannot predict the exact outcome before it happens. Before the coin lands, we do not know if it will be heads or tails. Each flip is uncertain, even if the coin is fair. That uncertainty is what makes a single trial random.</p>
-          </div>
-          <div>
-            <strong>Scene 3</strong>
-            <p>Probability tells us how likely an outcome is. A fair coin has two possible outcomes: heads and tails. Since both are equally likely, the probability of heads is one out of two, or fifty percent. The probability of tails is also one out of two, or fifty percent.</p>
-          </div>
-          <div>
-            <strong>Scene 4</strong>
-            <p>Now let’s run a small experiment. If we flip the coin only ten times, the results might look uneven. We might get more heads than tails, or more tails than heads. That does not mean the coin is broken. It simply means small samples can be messy.</p>
-          </div>
-          <div>
-            <strong>Scene 5</strong>
-            <p>When we increase the number of flips, the pattern starts becoming clearer. With one hundred flips, the percentages usually move closer to fifty-fifty. The results are still random, but the overall trend starts to match the expected probability.</p>
-          </div>
-          <div>
-            <strong>Scene 6</strong>
-            <p>With one thousand flips, the long-term pattern becomes much easier to see. Individual flips are still unpredictable, but the final percentages usually settle near fifty percent heads and fifty percent tails. This is the main idea: randomness affects single events, while probability describes long-term behavior.</p>
-          </div>
-          <div>
-            <strong>Scene 7</strong>
-            <p>This idea connects directly to Monte Carlo simulation. Monte Carlo simulations use randomness many times to estimate probabilities or solve problems. Instead of predicting one exact outcome, we run many trials, count what happens, and use the results to estimate the answer.</p>
-          </div>
-          <div>
-            <strong>Scene 8</strong>
-            <p>So the final takeaway is simple: one flip is random, but many flips reveal a pattern. Probability is not about knowing exactly what happens next. It is about understanding what happens over time.</p>
-          </div>
-        </div>
-      </details>
+      <div class="playback-chip" id="playbackChip">
+        <button class="ghost" id="floatingPauseButton">Pause</button>
+        <button class="ghost" id="floatingResetButton">Reset</button>
+      </div>
+
     </section>
 
     <div class="fade-screen" id="fadeScreen"></div>
@@ -1313,11 +1319,13 @@
     const tailsPercent = document.getElementById("tailsPercent");
 
     const startButton = document.getElementById("startButton");
-    const startAudioButton = document.getElementById("startAudioButton");
     const pauseButton = document.getElementById("pauseButton");
     const resetButton = document.getElementById("resetButton");
+    const floatingPauseButton = document.getElementById("floatingPauseButton");
+    const floatingResetButton = document.getElementById("floatingResetButton");
+    const playbackChip = document.getElementById("playbackChip");
     const speedSelect = document.getElementById("speedSelect");
-    const voiceover = document.getElementById("voiceover");
+    const cleanModeToggle = document.getElementById("cleanModeToggle");
 
     // ------------------------------
     // 2. Movie state and timing
@@ -1393,6 +1401,11 @@
       return speedSettings[speedSelect.value];
     }
 
+    function applyCleanMode() {
+      movie.classList.toggle("clean-mode", cleanModeToggle.checked);
+      updatePlayingState();
+    }
+
     function sceneDuration(sceneNumber) {
       return Math.round(baseSceneDurations[sceneNumber] * getSpeed().multiplier);
     }
@@ -1435,6 +1448,12 @@
     function flashTransition() {
       fadeScreen.classList.add("visible");
       setTimeout(() => fadeScreen.classList.remove("visible"), 700);
+    }
+
+    function updatePlayingState() {
+      movie.classList.toggle("playing", running);
+      playbackChip.classList.toggle("visible", running && !cleanModeToggle.checked);
+      floatingPauseButton.textContent = paused ? "Resume" : "Pause";
     }
 
     async function wait(ms, token) {
@@ -1602,11 +1621,6 @@
       }, 1800);
     }
 
-    function pauseAudioIfNeeded() {
-      voiceover.pause();
-      voiceover.currentTime = 0;
-    }
-
     function resetMovie() {
       runToken += 1;
       running = false;
@@ -1614,8 +1628,7 @@
       pauseButton.textContent = "Pause";
       pauseButton.disabled = true;
       startButton.disabled = false;
-      startAudioButton.disabled = false;
-      pauseAudioIfNeeded();
+      updatePlayingState();
 
       mainCoin.className = "main-coin";
       mainCoin.textContent = "🪙";
@@ -1642,9 +1655,9 @@
     async function scene1(token) {
       const duration = sceneDuration(1);
       flashTransition();
+      clearVisualBursts();
       heroNote.style.display = "";
       hideAllPanels();
-      clearVisualBursts();
       setScene(
         1,
         "Opening",
@@ -1674,9 +1687,9 @@
     async function scene2(token) {
       const duration = sceneDuration(2);
       flashTransition();
+      clearVisualBursts();
       heroNote.style.display = "none";
       hideAllPanels();
-      clearVisualBursts();
       setScene(
         2,
         "Randomness",
@@ -1721,8 +1734,8 @@
     async function scene3(token) {
       const duration = sceneDuration(3);
       flashTransition();
-      hideAllPanels();
       clearVisualBursts();
+      hideAllPanels();
       setScene(
         3,
         "Probability Basics",
@@ -1767,8 +1780,8 @@
     async function scene4(token) {
       const duration = sceneDuration(4);
       flashTransition();
-      hideAllPanels();
       clearVisualBursts();
+      hideAllPanels();
       resetCounts();
       setScene(
         4,
@@ -1813,8 +1826,8 @@
     async function scene5(token) {
       const duration = sceneDuration(5);
       flashTransition();
-      hideAllPanels();
       clearVisualBursts();
+      hideAllPanels();
       resetCounts();
       setScene(
         5,
@@ -1862,8 +1875,8 @@
     async function scene6(token) {
       const duration = sceneDuration(6);
       flashTransition();
-      hideAllPanels();
       clearVisualBursts();
+      hideAllPanels();
       resetCounts();
       setScene(
         6,
@@ -1920,8 +1933,8 @@
     async function scene7(token) {
       const duration = sceneDuration(7);
       flashTransition();
-      hideAllPanels();
       clearVisualBursts();
+      hideAllPanels();
       setScene(
         7,
         "Monte Carlo Connection",
@@ -1947,8 +1960,8 @@
     async function scene8(token) {
       const duration = sceneDuration(8);
       flashTransition();
-      hideAllPanels();
       clearVisualBursts();
+      hideAllPanels();
       setScene(
         8,
         "Final Takeaway",
@@ -1979,7 +1992,7 @@
     // ------------------------------
     // 6. Play the full movie
     // ------------------------------
-    async function playMovie(withAudio = false) {
+    async function playMovie() {
       if (running) {
         return;
       }
@@ -1988,18 +2001,9 @@
       running = true;
       paused = false;
       startButton.disabled = true;
-      startAudioButton.disabled = true;
       pauseButton.disabled = false;
       pauseButton.textContent = "Pause";
-
-      if (withAudio) {
-        try {
-          voiceover.currentTime = 0;
-          await voiceover.play();
-        } catch (error) {
-          setStatus("Movie started, but the audio file could not play yet.");
-        }
-      }
+      updatePlayingState();
 
       const token = ++runToken;
       const scenes = [scene1, scene2, scene3, scene4, scene5, scene6, scene7, scene8];
@@ -2009,8 +2013,8 @@
         if (!finished || token !== runToken) {
           running = false;
           startButton.disabled = false;
-          startAudioButton.disabled = false;
           pauseButton.disabled = true;
+          updatePlayingState();
           return;
         }
       }
@@ -2018,8 +2022,8 @@
       setStatus("Movie complete");
       running = false;
       startButton.disabled = false;
-      startAudioButton.disabled = false;
       pauseButton.disabled = true;
+      updatePlayingState();
     }
 
     function togglePause() {
@@ -2029,14 +2033,7 @@
 
       paused = !paused;
       pauseButton.textContent = paused ? "Resume" : "Pause";
-
-      if (!voiceover.paused) {
-        if (paused) {
-          voiceover.pause();
-        } else {
-          voiceover.play().catch(() => {});
-        }
-      }
+      floatingPauseButton.textContent = paused ? "Resume" : "Pause";
 
       setStatus(paused ? "Paused" : "Playing");
     }
@@ -2044,12 +2041,26 @@
     // ------------------------------
     // 7. Wire up the controls
     // ------------------------------
-    startButton.addEventListener("click", () => playMovie(false));
-    startAudioButton.addEventListener("click", () => playMovie(true));
+    startButton.addEventListener("click", playMovie);
     pauseButton.addEventListener("click", togglePause);
     resetButton.addEventListener("click", resetMovie);
+    floatingPauseButton.addEventListener("click", togglePause);
+    floatingResetButton.addEventListener("click", resetMovie);
     speedSelect.addEventListener("change", () => {
       setStatus(`Speed set to ${getSpeed().label}`);
+    });
+    cleanModeToggle.addEventListener("change", applyCleanMode);
+    cleanModeToggle.addEventListener("change", updatePlayingState);
+
+    window.addEventListener("keydown", (event) => {
+      if (event.code === "Space" && running) {
+        event.preventDefault();
+        togglePause();
+      }
+
+      if (event.key.toLowerCase() === "r") {
+        resetMovie();
+      }
     });
 
     // ------------------------------
@@ -2057,6 +2068,7 @@
     // ------------------------------
     buildStars();
     buildFloatingCoins();
+    applyCleanMode();
     resetMovie();
   </script>
 </body>
