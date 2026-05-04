@@ -927,6 +927,31 @@
       pointer-events: none;
     }
 
+    .movie:not(.playing) .top-hud,
+    .movie:not(.playing) .scene-badge {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .movie:not(.playing) .bottom-hud {
+      position: absolute;
+      left: 50%;
+      bottom: 112px;
+      transform: translateX(-50%);
+      width: min(1120px, calc(100% - 42px));
+      z-index: 26;
+      justify-content: center;
+    }
+
+    .movie:not(.playing) .caption-wrap {
+      bottom: 255px;
+    }
+
+    .movie:not(.playing) .presenter-panel {
+      min-width: min(520px, 60vw);
+    }
+
     .movie.clean-mode #runtimeNote,
     .movie.clean-mode .hero-note,
     .movie.clean-mode .playback-chip {
@@ -993,6 +1018,15 @@
       .top-hud,
       .bottom-hud {
         padding: 14px;
+      }
+
+      .movie:not(.playing) .bottom-hud {
+        bottom: 132px;
+        width: calc(100% - 20px);
+      }
+
+      .movie:not(.playing) .caption-wrap {
+        bottom: 292px;
       }
 
       .presenter-panel {
