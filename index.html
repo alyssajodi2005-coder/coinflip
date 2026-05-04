@@ -888,7 +888,9 @@
     }
 
     .movie.playing .top-hud,
-    .movie.playing .bottom-hud {
+    .movie.playing .bottom-hud,
+    .movie.playing .hero-note,
+    .movie.playing #runtimeNote {
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
@@ -1502,7 +1504,7 @@
       flashTransition();
       clearVisualBursts();
       hideAllPanels();
-      heroNote.style.display = "";
+      heroNote.style.display = "none";
       setScene(
         1,
         "Opening",
