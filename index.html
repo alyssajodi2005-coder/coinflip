@@ -1110,7 +1110,9 @@
       <div class="bottom-hud">
         <div class="status" id="sceneProgress">Scene 1 of 7</div>
         <div class="controls">
+          <button class="ghost" id="backButton">Back</button>
           <button id="startButton">Start Movie</button>
+          <button class="ghost" id="nextButton">Next</button>
           <button class="ghost" id="pauseButton" disabled>Pause</button>
           <button class="ghost" id="resetButton">Reset</button>
           <label class="speed-wrap" for="speedSelect">
@@ -1179,6 +1181,8 @@
     const tailsTrack = document.getElementById("tailsTrack");
 
     const startButton = document.getElementById("startButton");
+    const backButton = document.getElementById("backButton");
+    const nextButton = document.getElementById("nextButton");
     const pauseButton = document.getElementById("pauseButton");
     const resetButton = document.getElementById("resetButton");
     const floatingPauseButton = document.getElementById("floatingPauseButton");
@@ -1196,6 +1200,7 @@
     let paused = false;
     let running = false;
     let runToken = 0;
+    let currentSceneIndex = 0;
 
     // About 4 minutes 30 seconds at normal speed.
     const baseSceneDurations = {
@@ -1213,6 +1218,16 @@
       normal: { multiplier: 1, label: "Normal" },
       fast: { multiplier: 0.76, label: "Fast" }
     };
+
+    const sceneTitles = [
+      "Opening",
+      "Randomness",
+      "Small Sample Chaos",
+      "Bigger Sample",
+      "Long-Term Pattern",
+      "Monte Carlo Simulation",
+      "Final Takeaway"
+    ];
 
     // ------------------------------
     // 3. Background setup
@@ -1277,6 +1292,9 @@
       movie.classList.toggle("playing", running);
       playbackChip.classList.toggle("visible", running && !cleanModeToggle.checked);
       floatingPauseButton.textContent = paused ? "Resume" : "Pause";
+      backButton.disabled = running || currentSceneIndex === 0;
+      nextButton.disabled = running || currentSceneIndex === sceneTitles.length - 1;
+      startButton.textContent = running ? "Playing..." : `Start Movie${currentSceneIndex > 0 ? ` From Scene ${currentSceneIndex + 1}` : ""}`;
     }
 
     function setCoinPosition(left, top) {
@@ -1472,6 +1490,7 @@
       runToken += 1;
       running = false;
       paused = false;
+      currentSceneIndex = 0;
       pauseButton.textContent = "Pause";
       pauseButton.disabled = true;
       startButton.disabled = false;
@@ -1496,10 +1515,97 @@
       setStatus("Ready to start the movie");
     }
 
+    function previewScene(index) {
+      currentSceneIndex = index;
+      clearVisualBursts();
+      hideAllPanels();
+      resetCounts();
+      mainCoin.className = "main-coin";
+      mainCoin.textContent = "🪙";
+      heroNote.style.display = index === 0 ? "" : "none";
+
+      if (index === 0) {
+        setCoinPosition("50%", "45%");
+        pulseCoin(true);
+        setScene(1, "Opening", "The Coin Flip Universe", "Every flip is unpredictable… but patterns appear over time.");
+        setStatus("Previewing Scene 1");
+      }
+
+      if (index === 1) {
+        setCoinPosition("50%", "46%");
+        pulseCoin(true);
+        setScene(2, "Randomness", "Randomness", "Randomness means we cannot predict one exact outcome.");
+        setStatus("Previewing Scene 2");
+      }
+
+      if (index === 2) {
+        setCoinPosition("50%", "31%");
+        pulseCoin(false);
+        showElement(metricPanel, true);
+        setScene(3, "Small Sample Chaos", "Small Sample Chaos", "With a small sample, results can look messy.");
+        setStatus("Previewing Scene 3");
+      }
+
+      if (index === 3) {
+        setCoinPosition("22%", "46%");
+        pulseCoin(true);
+        showElement(metricPanel, true);
+        showElement(barsPanel, true);
+        setScene(4, "Bigger Sample", "Bigger Sample", "More trials usually move us closer to the expected probability.");
+        setStatus("Previewing Scene 4");
+      }
+
+      if (index === 4) {
+        setCoinPosition("50%", "18%");
+        pulseCoin(true);
+        showElement(metricPanel, true);
+        showElement(barsPanel, true);
+        showElement(columnsPanel, true);
+        setScene(5, "Long-Term Pattern", "Long-Term Pattern", "Probability describes the long-term pattern, not every single result.");
+        setStatus("Previewing Scene 5");
+      }
+
+      if (index === 5) {
+        setCoinPosition("16%", "49%");
+        pulseCoin(true);
+        showElement(machinePanel, true);
+        setScene(6, "Monte Carlo Connection", "Monte Carlo Simulation", "Monte Carlo simulation uses randomness many times to estimate probability.");
+        setStatus("Previewing Scene 6");
+      }
+
+      if (index === 6) {
+        setCoinPosition("50%", "35%");
+        pulseCoin(true);
+        showElement(takeawayPanel, true);
+        setScene(7, "Final Takeaway", "Final Takeaway", "One flip is random. Many flips reveal a pattern.");
+        setStatus("Previewing Scene 7");
+      }
+
+      updatePlayingState();
+    }
+
+    function goToNextScene() {
+      if (running || currentSceneIndex >= sceneTitles.length - 1) {
+        return;
+      }
+
+      previewScene(currentSceneIndex + 1);
+    }
+
+    function goToPreviousScene() {
+      if (running || currentSceneIndex <= 0) {
+        return;
+      }
+
+      previewScene(currentSceneIndex - 1);
+    }
+
     // ------------------------------
     // 5. Scene logic
     // ------------------------------
     async function scene1(token) {
+      currentSceneIndex = 0;
+      updatePlayingState();
       const duration = sceneDuration(1);
       flashTransition();
       clearVisualBursts();
@@ -1527,6 +1633,8 @@
     }
 
     async function scene2(token) {
+      currentSceneIndex = 1;
+      updatePlayingState();
       const duration = sceneDuration(2);
       flashTransition();
       clearVisualBursts();
@@ -1574,6 +1682,8 @@
     }
 
     async function scene3(token) {
+      currentSceneIndex = 2;
+      updatePlayingState();
       const duration = sceneDuration(3);
       flashTransition();
       clearVisualBursts();
@@ -1620,6 +1730,8 @@
     }
 
     async function scene4(token) {
+      currentSceneIndex = 3;
+      updatePlayingState();
       const duration = sceneDuration(4);
       flashTransition();
       clearVisualBursts();
@@ -1669,6 +1781,8 @@
     }
 
     async function scene5(token) {
+      currentSceneIndex = 4;
+      updatePlayingState();
       const duration = sceneDuration(5);
       flashTransition();
       clearVisualBursts();
@@ -1727,6 +1841,8 @@
     }
 
     async function scene6(token) {
+      currentSceneIndex = 5;
+      updatePlayingState();
       const duration = sceneDuration(6);
       flashTransition();
       clearVisualBursts();
@@ -1754,6 +1870,8 @@
     }
 
     async function scene7(token) {
+      currentSceneIndex = 6;
+      updatePlayingState();
       const duration = sceneDuration(7);
       flashTransition();
       clearVisualBursts();
@@ -1793,9 +1911,11 @@
         return;
       }
 
+      const startFromScene = currentSceneIndex;
       resetMovie();
       running = true;
       paused = false;
+      currentSceneIndex = startFromScene;
       startButton.disabled = true;
       pauseButton.disabled = false;
       pauseButton.textContent = "Pause";
@@ -1804,7 +1924,8 @@
       const token = ++runToken;
       const scenes = [scene1, scene2, scene3, scene4, scene5, scene6, scene7];
 
-      for (const scene of scenes) {
+      for (let index = startFromScene; index < scenes.length; index += 1) {
+        const scene = scenes[index];
         const finished = await scene(token);
         if (!finished || token !== runToken) {
           running = false;
@@ -1837,6 +1958,8 @@
     // 7. Wire up controls
     // ------------------------------
     startButton.addEventListener("click", playMovie);
+    backButton.addEventListener("click", goToPreviousScene);
+    nextButton.addEventListener("click", goToNextScene);
     pauseButton.addEventListener("click", togglePause);
     resetButton.addEventListener("click", resetMovie);
     floatingPauseButton.addEventListener("click", togglePause);
