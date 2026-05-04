@@ -460,7 +460,7 @@
     .text-moment {
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 38%;
       transform: translate(-50%, -50%);
       font-size: clamp(2.2rem, 5vw, 5rem);
       font-weight: 900;
@@ -593,8 +593,7 @@
     .brand,
     .status,
     .controls,
-    .note-badge,
-    .script-panel {
+    .note-badge {
       backdrop-filter: blur(14px);
       background: var(--panel);
       border: 1px solid var(--line);
@@ -632,8 +631,7 @@
     }
 
     button,
-    select,
-    summary {
+    select {
       border: none;
       border-radius: var(--radius-pill);
       font: inherit;
@@ -662,10 +660,6 @@
     .ghost {
       background: rgba(255, 255, 255, 0.1);
       box-shadow: none;
-    }
-
-    .audio-button {
-      background: linear-gradient(135deg, var(--pink-2), var(--violet-2));
     }
 
     .speed-wrap {
@@ -1010,7 +1004,7 @@
       display: none;
     }
 
-    .movie.clean-mode .hero-note.hidden-note {
+    .movie.clean-mode .hero-note {
       display: none;
     }
 
