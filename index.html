@@ -495,7 +495,8 @@
     .brand,
     .status,
     .controls,
-    .note-badge {
+    .note-badge,
+    .presenter-panel {
       border: 1px solid var(--panel-line);
       background: var(--panel);
       box-shadow: var(--glow);
@@ -530,6 +531,35 @@
       gap: 12px;
       padding: 12px;
       border-radius: var(--radius-pill);
+    }
+
+    .presenter-panel {
+      display: grid;
+      gap: 6px;
+      padding: 14px 18px;
+      border-radius: 22px;
+      min-width: min(360px, 44vw);
+    }
+
+    .presenter-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .presenter-scene {
+      font-size: clamp(1.45rem, 2.1vw, 2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .presenter-note {
+      font-size: 1rem;
+      line-height: 1.45;
+      color: var(--text-soft);
     }
 
     button,
@@ -965,6 +995,10 @@
         padding: 14px;
       }
 
+      .presenter-panel {
+        min-width: 100%;
+      }
+
       .hero-note {
         width: calc(100% - 36px);
         text-align: center;
@@ -1108,7 +1142,11 @@
       </div>
 
       <div class="bottom-hud">
-        <div class="status" id="sceneProgress">Scene 1 of 7</div>
+        <div class="presenter-panel">
+          <div class="presenter-label">Recording Guide</div>
+          <div class="presenter-scene" id="sceneProgress">Scene 1 of 7: Opening</div>
+          <div class="presenter-note" id="sceneCue">Start here, then use Next to line up your voiceover before pressing Start Movie.</div>
+        </div>
         <div class="controls">
           <button class="ghost" id="backButton">Back</button>
           <button id="startButton">Start Movie</button>
@@ -1158,6 +1196,7 @@
     const captionText = document.getElementById("captionText");
     const statusText = document.getElementById("statusText");
     const sceneProgress = document.getElementById("sceneProgress");
+    const sceneCue = document.getElementById("sceneCue");
     const fadeScreen = document.getElementById("fadeScreen");
 
     const metricPanel = document.getElementById("metricPanel");
@@ -1229,6 +1268,16 @@
       "Final Takeaway"
     ];
 
+    const sceneCues = [
+      "Introduce the big idea: one random flip can still lead to a pattern over time.",
+      "Explain that we cannot predict one exact flip before it lands.",
+      "Point out that 10 flips can easily look messy or uneven.",
+      "Show that 100 flips usually move the percentages closer to 50/50.",
+      "Emphasize that long-term behavior becomes clearer with many trials.",
+      "Connect the visual experiment to Monte Carlo simulation and estimation.",
+      "Close with the final takeaway: many random trials reveal a pattern."
+    ];
+
     // ------------------------------
     // 3. Background setup
     // ------------------------------
@@ -1273,10 +1322,11 @@
     }
 
     function setScene(sceneNumber, badge, title, caption) {
-      sceneProgress.textContent = `Scene ${sceneNumber} of 7`;
+      sceneProgress.textContent = `Scene ${sceneNumber} of 7: ${sceneTitles[sceneNumber - 1]}`;
       sceneBadge.textContent = badge;
       titleText.textContent = title;
       captionText.textContent = caption;
+      sceneCue.textContent = sceneCues[sceneNumber - 1];
     }
 
     function setStatus(text) {
